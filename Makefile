@@ -6,12 +6,15 @@ CC = clang
 OBJCOPY = llvm-objcopy
 CFLAGS = -O2 -pipe -Wall -Wextra
 
-.PHONY: all install clean echfs-test ext2-test test.img
+.PHONY: all modules install clean echfs-test ext2-test test.img
 
 all: limine-install
 
 install: all
 	install -s limine-install $(DESTDIR)$(PREFIX)/bin/
+
+modules:
+	cd modules && ./make_modules.sh
 
 clean:
 	rm -f limine-install
@@ -20,7 +23,7 @@ clean:
 src/limine.bin:
 	$(MAKE) -C src all
 
-limine-install: src/limine.bin limine-install.c
+limine-install: modules src/limine.bin limine-install.c
 	$(CC) $(CFLAGS) -c limine-install.c -o limine-install.o
 	# FIXME: GNU objcopy supports `-O default` but for some stupid reason
 	#        llvm-objcopy does not. This needs to be worked around.
