@@ -82,4 +82,22 @@ db 10010010b        ; Access
 db 00000000b        ; Granularity
 db 0x00             ; Base (high 8 bits)
 
+; entries for segmentation
+
+; 0x38 (entry 7)
+dw 0xFFFF			; Limit
+dw 0x0000			; Base (low 16 bits)
+db 0x00				; Base (mid 8 bits)
+db 10011010b		; Access
+db 11001111b		; Granularity
+db 0x00				; Base (high 8 bits)
+
+; 0x40 (entry 8)
+dw 0xFFFF			; Limit
+dw 0x0000			; Base (low 16 bits)
+db 0x00				; Base (mid 8 bits)
+db 10010010b		; Access
+db 11001111b		; Granularity
+db 0x00				; Base (high 8 bits)
+
 .GDTEnd:
