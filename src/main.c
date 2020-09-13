@@ -35,7 +35,7 @@ ASM_BASIC(
 #include <protos/chainload.h>
 #include <menu.h>
 
-void main(int boot_drive) {
+void main(struct module_header *modules, size_t module_count, int boot_drive) {
     term_textmode();
 
     print("Limine " LIMINE_VERSION "\n\n");
